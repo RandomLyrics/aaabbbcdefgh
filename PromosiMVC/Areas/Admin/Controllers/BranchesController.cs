@@ -15,7 +15,7 @@ namespace PromosiMVC.Areas.Admin.Controllers
     public class BranchesController : BaseController
     {
         /// <summary>
-        /// fdsad
+        /// fdsadfdsfdsf
         /// </summary>
         /// <returns></returns>
         // GET: Admin/Branches
