@@ -16,8 +16,8 @@ namespace PromosiMVC.Areas.User
         {
             context.MapRoute(
                 "User_default",
-                "User/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
+                "{controller}/{id}/{action}",
+                new { controller = "User", action = "Index", id = UrlParameter.Optional },
                 new { id = @"\d+" }
             );
         }
