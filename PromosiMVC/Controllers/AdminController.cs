@@ -9,6 +9,7 @@ namespace PromosiMVC.Controllers
 {
     public class AdminController : BaseController
     {
+        //sadsadasdasdasd
         // GET: Admin
         public ActionResult Index()
         {

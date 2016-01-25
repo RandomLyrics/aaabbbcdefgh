@@ -9,6 +9,7 @@ namespace PromosiMVC.Controllers
 {
     public class LoginController : BaseController
     {
+        //sadsadsad
         // GET: User
         public ActionResult Index(string tok)
         {
