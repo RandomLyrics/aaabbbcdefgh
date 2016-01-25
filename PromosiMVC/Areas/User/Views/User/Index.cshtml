@@ -1,0 +1,38 @@
+﻿@model PromosiMVC.User
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header" style="color: gold">
+            Promosi
+            @DateTime.Now.ToString("dddd HH:mm")
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav"></ul>
+        </div>
+    </div>
+</div>
+<h2>Powiadomienia</h2>
+
+<table class="table">
+    <tr>
+        <td>
+            Witaj @Model.Name!!
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Model.Surname
+        </td>
+    </tr>
+    @foreach (var item in Model.Followings)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.Name)
+            </td>
+        </tr>
+    }
+</table>

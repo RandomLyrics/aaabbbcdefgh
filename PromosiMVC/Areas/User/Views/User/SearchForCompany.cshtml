@@ -1,0 +1,67 @@
+﻿@model IEnumerable<PromosiMVC.Company>
+
+@{
+    ViewBag.Title = "SearchForCompany";
+}
+
+<h2>SearchForCompany</h2>
+
+<p>
+    @Html.Hidden("id")
+    @Html.ActionLink("Create New", "Create")
+
+    @using (Html.BeginForm("SearchForCompany", "User", FormMethod.Get))
+    {
+        <p>
+            @Html.TextBox("cname", "")
+            @Html.DropDownList("CityId", String.Empty)
+            @Html.DropDownList("BranchId", String.Empty)
+            <input type="submit" value="Szukaj" />
+        </p>
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phonenumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Branch.Name)
+        </th>
+        <th></th>
+    </tr>
+   
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("AddCompany", "User", new { id = ViewBag.userId, cid = item.Id }, FormMethod.Post))
+        {
+                @Html.AntiForgeryToken()
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phonenumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Branch.Name)
+                </td>
+                <td>
+                    <input type="submit"  value="Dodaj" />
+                    @*@Ajax.ActionLink("Dodaj", "AddCompany", new { id = ViewBag.userId, cid = item.Id }, new AjaxOptions { HttpMethod = "POST" })*@
+                </td>
+            </tr>
+        }
+    }
+
+
+</table>

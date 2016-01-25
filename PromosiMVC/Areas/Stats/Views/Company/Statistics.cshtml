@@ -1,0 +1,21 @@
+﻿@model PromosiMVC.Areas.Stats.Models.Statistics
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Statistics</h2>
+
+
+<table class="table">
+    <tr>
+        <td>
+            Liczba subskrybujacych: @Model.Clients
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Liczba wyslanych pushy: @Model.Pushes
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,626 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PromosiDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="PromosiDBModelStoreContainer">
+    <EntitySet Name="UserSet" EntityType="PromosiDBModel.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CompanySet" EntityType="PromosiDBModel.Store.CompanySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BranchSet" EntityType="PromosiDBModel.Store.BranchSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CitySet" EntityType="PromosiDBModel.Store.CitySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PushSet" EntityType="PromosiDBModel.Store.PushSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PushesSet" EntityType="PromosiDBModel.Store.PushesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogSet" EntityType="PromosiDBModel.Store.LogSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogTypeSet" EntityType="PromosiDBModel.Store.LogTypeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FollowingsSet" EntityType="PromosiDBModel.Store.FollowingsSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserPushes" Association="PromosiDBModel.Store.UserPushes">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Pushes" EntitySet="PushesSet" />
+    </AssociationSet>
+    <AssociationSet Name="CompanyPush" Association="PromosiDBModel.Store.CompanyPush">
+      <End Role="Company" EntitySet="CompanySet" />
+      <End Role="Push" EntitySet="PushSet" />
+    </AssociationSet>
+    <AssociationSet Name="BranchCompany" Association="PromosiDBModel.Store.BranchCompany">
+      <End Role="Branch" EntitySet="BranchSet" />
+      <End Role="Company" EntitySet="CompanySet" />
+    </AssociationSet>
+    <AssociationSet Name="CityCompany" Association="PromosiDBModel.Store.CityCompany">
+      <End Role="City" EntitySet="CitySet" />
+      <End Role="Company" EntitySet="CompanySet" />
+    </AssociationSet>
+    <AssociationSet Name="PushPushes" Association="PromosiDBModel.Store.PushPushes">
+      <End Role="Push" EntitySet="PushSet" />
+      <End Role="Pushes" EntitySet="PushesSet" />
+    </AssociationSet>
+    <AssociationSet Name="LogTypeLog" Association="PromosiDBModel.Store.LogTypeLog">
+      <End Role="LogType" EntitySet="LogTypeSet" />
+      <End Role="Log" EntitySet="LogSet" />
+    </AssociationSet>
+    <AssociationSet Name="CompanyFollowings" Association="PromosiDBModel.Store.CompanyFollowings">
+      <End Role="Company" EntitySet="CompanySet" />
+      <End Role="Followings" EntitySet="FollowingsSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserFollowings" Association="PromosiDBModel.Store.UserFollowings">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Followings" EntitySet="FollowingsSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Phonenumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="RegistrationId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DeviceToken" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NIP" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Adress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phonenumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ChannelName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BranchId" Type="bigint" Nullable="false" />
+    <Property Name="CityId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BranchSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CitySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PushSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DateBegin" Type="datetime" Nullable="false" />
+    <Property Name="DateEnd" Type="datetime" Nullable="false" />
+    <Property Name="Available" Type="bit" Nullable="false" />
+    <Property Name="CompanyId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PushesSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PushId" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="Checked" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ObjectId" Type="bigint" Nullable="false" />
+    <Property Name="ObjectType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="LogTypeId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogTypeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FollowingsSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="UserPushes">
+    <End Role="User" Type="PromosiDBModel.Store.UserSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Pushes" Type="PromosiDBModel.Store.PushesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pushes">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompanyPush">
+    <End Role="Company" Type="PromosiDBModel.Store.CompanySet" Multiplicity="1" />
+    <End Role="Push" Type="PromosiDBModel.Store.PushSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Push">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BranchCompany">
+    <End Role="Branch" Type="PromosiDBModel.Store.BranchSet" Multiplicity="1" />
+    <End Role="Company" Type="PromosiDBModel.Store.CompanySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CityCompany">
+    <End Role="City" Type="PromosiDBModel.Store.CitySet" Multiplicity="1" />
+    <End Role="Company" Type="PromosiDBModel.Store.CompanySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PushPushes">
+    <End Role="Push" Type="PromosiDBModel.Store.PushSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Pushes" Type="PromosiDBModel.Store.PushesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Push">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pushes">
+        <PropertyRef Name="PushId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LogTypeLog">
+    <End Role="LogType" Type="PromosiDBModel.Store.LogTypeSet" Multiplicity="1" />
+    <End Role="Log" Type="PromosiDBModel.Store.LogSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LogType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Log">
+        <PropertyRef Name="LogTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompanyFollowings">
+    <End Role="Company" Type="PromosiDBModel.Store.CompanySet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Followings" Type="PromosiDBModel.Store.FollowingsSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Followings">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserFollowings">
+    <End Role="User" Type="PromosiDBModel.Store.UserSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Followings" Type="PromosiDBModel.Store.FollowingsSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Followings">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="PromosiDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="PromosiDBModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserSet" EntityType="PromosiDBModel.User" />
+          <EntitySet Name="CompanySet" EntityType="PromosiDBModel.Company" />
+          <EntitySet Name="BranchSet" EntityType="PromosiDBModel.Branch" />
+          <EntitySet Name="CitySet" EntityType="PromosiDBModel.City" />
+          <EntitySet Name="PushSet" EntityType="PromosiDBModel.Push" />
+          <EntitySet Name="PushesSet" EntityType="PromosiDBModel.Pushes" />
+          <EntitySet Name="LogSet" EntityType="PromosiDBModel.Log" />
+          <EntitySet Name="LogTypeSet" EntityType="PromosiDBModel.LogType" />
+          <AssociationSet Name="UserPushes" Association="PromosiDBModel.UserPushes">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Pushes" EntitySet="PushesSet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyPush" Association="PromosiDBModel.CompanyPush">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="Push" EntitySet="PushSet" />
+          </AssociationSet>
+          <AssociationSet Name="BranchCompany" Association="PromosiDBModel.BranchCompany">
+            <End Role="Branch" EntitySet="BranchSet" />
+            <End Role="Company" EntitySet="CompanySet" />
+          </AssociationSet>
+          <AssociationSet Name="CityCompany" Association="PromosiDBModel.CityCompany">
+            <End Role="City" EntitySet="CitySet" />
+            <End Role="Company" EntitySet="CompanySet" />
+          </AssociationSet>
+          <AssociationSet Name="PushPushes" Association="PromosiDBModel.PushPushes">
+            <End Role="Push" EntitySet="PushSet" />
+            <End Role="Pushes" EntitySet="PushesSet" />
+          </AssociationSet>
+          <AssociationSet Name="LogTypeLog" Association="PromosiDBModel.LogTypeLog">
+            <End Role="LogType" EntitySet="LogTypeSet" />
+            <End Role="Log" EntitySet="LogSet" />
+          </AssociationSet>
+          <EntitySet Name="FollowingsSet" EntityType="PromosiDBModel.Followings" />
+          <AssociationSet Name="CompanyFollowings" Association="PromosiDBModel.CompanyFollowings">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="Followings" EntitySet="FollowingsSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserFollowings" Association="PromosiDBModel.UserFollowings">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Followings" EntitySet="FollowingsSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="true" />
+          <Property Name="Surname" Type="String" Nullable="true" />
+          <Property Name="Phonenumber" Type="String" Nullable="true" />
+          <Property Name="Email" Type="String" Nullable="true" />
+          <Property Name="RegistrationId" Type="String" Nullable="false" />
+          <Property Name="DeviceToken" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="Pushes" Relationship="PromosiDBModel.UserPushes" FromRole="User" ToRole="Pushes" />
+          <NavigationProperty Name="Followings" Relationship="PromosiDBModel.UserFollowings" FromRole="User" ToRole="Followings" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="NIP" Type="String" Nullable="false" />
+          <Property Name="Adress" Type="String" Nullable="false" />
+          <Property Name="Phonenumber" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="ChannelName" Type="String" Nullable="false" />
+          <Property Name="BranchId" Type="Int64" Nullable="false" />
+          <Property Name="CityId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Push" Relationship="PromosiDBModel.CompanyPush" FromRole="Company" ToRole="Push" />
+          <NavigationProperty Name="Branch" Relationship="PromosiDBModel.BranchCompany" FromRole="Company" ToRole="Branch" />
+          <NavigationProperty Name="City" Relationship="PromosiDBModel.CityCompany" FromRole="Company" ToRole="City" />
+          <NavigationProperty Name="Followings" Relationship="PromosiDBModel.CompanyFollowings" FromRole="Company" ToRole="Followings" />
+        </EntityType>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="PromosiDBModel.BranchCompany" FromRole="Branch" ToRole="Company" />
+          <Property Name="Description" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="PromosiDBModel.CityCompany" FromRole="City" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Push">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="DateBegin" Type="DateTime" Nullable="false" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" />
+          <Property Name="Available" Type="Boolean" Nullable="false" />
+          <Property Name="CompanyId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="PromosiDBModel.CompanyPush" FromRole="Push" ToRole="Company" />
+          <NavigationProperty Name="Pushes" Relationship="PromosiDBModel.PushPushes" FromRole="Push" ToRole="Pushes" />
+        </EntityType>
+        <EntityType Name="Pushes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PushId" Type="Int64" Nullable="false" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="Checked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="PromosiDBModel.UserPushes" FromRole="Pushes" ToRole="User" />
+          <NavigationProperty Name="Push" Relationship="PromosiDBModel.PushPushes" FromRole="Pushes" ToRole="Push" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ObjectId" Type="Int64" Nullable="false" />
+          <Property Name="ObjectType" Type="String" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="LogTypeId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="LogType" Relationship="PromosiDBModel.LogTypeLog" FromRole="Log" ToRole="LogType" />
+        </EntityType>
+        <EntityType Name="LogType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Log" Relationship="PromosiDBModel.LogTypeLog" FromRole="LogType" ToRole="Log" />
+        </EntityType>
+        <Association Name="UserPushes">
+          <End Type="PromosiDBModel.User" Role="User" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PromosiDBModel.Pushes" Role="Pushes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pushes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanyPush">
+          <End Type="PromosiDBModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="PromosiDBModel.Push" Role="Push" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Push">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BranchCompany">
+          <End Type="PromosiDBModel.Branch" Role="Branch" Multiplicity="1" />
+          <End Type="PromosiDBModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CityCompany">
+          <End Type="PromosiDBModel.City" Role="City" Multiplicity="1" />
+          <End Type="PromosiDBModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PushPushes">
+          <End Type="PromosiDBModel.Push" Role="Push" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PromosiDBModel.Pushes" Role="Pushes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Push">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pushes">
+              <PropertyRef Name="PushId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LogTypeLog">
+          <End Type="PromosiDBModel.LogType" Role="LogType" Multiplicity="1" />
+          <End Type="PromosiDBModel.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LogType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="LogTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Followings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Company" Relationship="PromosiDBModel.CompanyFollowings" FromRole="Followings" ToRole="Company" />
+          <Property Name="CompanyId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="PromosiDBModel.UserFollowings" FromRole="Followings" ToRole="User" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+        </EntityType>
+        <Association Name="CompanyFollowings">
+          <End Type="PromosiDBModel.Company" Role="Company" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PromosiDBModel.Followings" Role="Followings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Followings">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserFollowings">
+          <End Type="PromosiDBModel.User" Role="User" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PromosiDBModel.Followings" Role="Followings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Followings">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PromosiDBModelStoreContainer" CdmEntityContainer="PromosiDBModelContainer">
+    <EntitySetMapping Name="UserSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PromosiDBModel.User)">
+        <MappingFragment StoreEntitySet="UserSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+          <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanySet">
+      <EntityTypeMapping TypeName="IsTypeOf(PromosiDBModel.Company)">
+        <MappingFragment StoreEntitySet="CompanySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NIP" ColumnName="NIP" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ChannelName" ColumnName="ChannelName" />
+          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BranchSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PromosiDBModel.Branch)">
+        <MappingFragment StoreEntitySet="BranchSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CitySet">
+      <EntityTypeMapping TypeName="IsTypeOf(PromosiDBModel.City)">
+        <MappingFragment StoreEntitySet="CitySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PushSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PromosiDBModel.Push)">
+        <MappingFragment StoreEntitySet="PushSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+          <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+          <ScalarProperty Name="Available" ColumnName="Available" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PushesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PromosiDBModel.Pushes)">
+        <MappingFragment StoreEntitySet="PushesSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PushId" ColumnName="PushId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Checked" ColumnName="Checked" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PromosiDBModel.Log)">
+        <MappingFragment StoreEntitySet="LogSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="ObjectType" ColumnName="ObjectType" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="LogTypeId" ColumnName="LogTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogTypeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PromosiDBModel.LogType)">
+        <MappingFragment StoreEntitySet="LogTypeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FollowingsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PromosiDBModel.Followings)">
+        <MappingFragment StoreEntitySet="FollowingsSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
