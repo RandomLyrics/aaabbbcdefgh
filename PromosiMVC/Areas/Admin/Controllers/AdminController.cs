@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace PromosiMVC.Controllers
+namespace PromosiMVC.Areas.Admin.Controllers
 {
     public class AdminController : BaseController
     {

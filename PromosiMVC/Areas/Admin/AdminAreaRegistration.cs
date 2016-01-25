@@ -16,8 +16,8 @@ namespace PromosiMVC.Areas.Admin
         {
             context.MapRoute(
                 "Admin_default",
-                "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                "{controller}/{action}/{id}",
+                new { controller="admin",action = "Index", id = UrlParameter.Optional }
             );
         }
     }
