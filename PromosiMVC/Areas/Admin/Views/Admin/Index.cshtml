@@ -1,29 +1,29 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Strona Główna";
 }
 
-<h2>Admin Panel</h2>
+<h2>Panel administracyjny</h2>
 
 <table class="table">
     <tr>
         <td>
-            @Html.ActionLink("Powiadomienia", "Pushes")
+            @Html.ActionLink("Powiadomienia PUSH", "../Pushes")
         </td>
     </tr>
     <tr>
         <td>
-            @Html.ActionLink("Lista firm", "Companies")
+            @Html.ActionLink("Lista firm", "../Companies")
         </td>
     </tr>
     <tr>
         <td>
-            @Html.ActionLink("Lista branż", "Branches")
+            @Html.ActionLink("Lista branż", "../Branches")
         </td>
     </tr>
     <tr>
         <td>
-            @Html.ActionLink("Lista miast", "Cities")
+            @Html.ActionLink("Lista miast", "../Cities")
         </td>
     </tr>
 </table>
